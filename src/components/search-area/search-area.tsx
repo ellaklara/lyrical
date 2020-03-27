@@ -1,22 +1,28 @@
 import React, { FC, useState, useEffect } from 'react';
-import { searchGenius } from '../../model/genius/geniusFunctions';
-import './search-bar.css'
-import Thumbnail from '../thumbnail/thumbnail';
+import { searchTrackByArtist } from '../../model/genius/geniusFunctions';
+import './search-area.css'
 import SearchResult from '../search-result/search-result';
 import Spinner from '../../assets/spinner.svg'
+import MainArea from '../main-area/main-area';
 
-type SearchBarProps = {
+const SearchArea: FC<{}> = (props) => {
 
-}
+    const initialCont = <div className='center'>Search for a song...</div>;
 
-const SearchBar: FC<SearchBarProps> = (props) => {
     const [loading, setLoading] = useState(false);
     const [results, setResults]: any = useState({response: null});
     const [value, setValue] = useState('');
-    const [cont, setCont] = useState(<div></div>);
+    const [cont, setCont] = useState(initialCont);
 
     useEffect(() => {
         if(results.hits) {
+            if (results.canceled) {
+                setCont(<></>)
+            } else if (value === '') {
+                setCont(initialCont)
+            } else if(results.hits.length === 0) {
+                setCont(<div className='center'>No results</div>)
+            } else
             setCont(
                 <ul className='search-results'>
                     {results.hits.map((result: any) =>
@@ -30,7 +36,7 @@ const SearchBar: FC<SearchBarProps> = (props) => {
 
     const search = async (val: string) => {
         setLoading(true);
-        setResults(await searchGenius(val));
+        setResults(await searchTrackByArtist(val));
     };
   
     const onChangeHandler = async (e: any)  => {
@@ -39,7 +45,8 @@ const SearchBar: FC<SearchBarProps> = (props) => {
     };
 
     return (
-        <>
+        
+        <div style={{display: 'flex', width: '100%', height: '100%', flexDirection: 'column'}}>
             <div className='search-bar-container'>
                 <div className='search-bar'>
                     <input
@@ -50,11 +57,11 @@ const SearchBar: FC<SearchBarProps> = (props) => {
                     />
                 </div>
             </div>
-            <div className='search-area'> 
-                {loading ? <div className='spinner' ><img src={Spinner}></img></div> : cont}
-            </div>
-        </>
+            <MainArea>
+                {loading ? <div className='center' ><img src={Spinner}></img></div> : cont}
+            </MainArea>
+        </div>
     );
 }
 
-export default SearchBar;
+export default SearchArea;

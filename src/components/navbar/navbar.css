@@ -1,0 +1,42 @@
+.navbar-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 200px;
+    background-color: var(--c-primary-dark);
+    border-right: 1px solid var(--c-primary);
+    color: var(--c-text-light);
+}
+
+.navbar-header, .navbar-footer {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.navbar-header {
+    height: 100px;
+    border-bottom: 1px solid var(--c-primary);
+}
+
+.logo {
+    font-family: 'Varela Round', sans-serif;
+    font-size: 1.7rem;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.navbar-content {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    flex-direction: column;
+    flex: 8;
+    padding-top: 30px;
+}
+
+.navbar-footer {
+    height: 200px;
+    border-top: 1px solid var(--c-primary);
+}

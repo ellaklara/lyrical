@@ -42,7 +42,7 @@ type GeniusAlbum = {
     artist: GeniusArtist
 }
 
-type GeniusSong = {
+export type GeniusSong = {
     annotation_count: number,
     api_path: string,
     apple_music_id: string,
@@ -101,16 +101,16 @@ async function fetchGenius(endpoint: string, errorRes: any): Promise<any> {
     }
     try {
         if (resources[endpoint]) {
-            // Return result if it exists
             return resources[endpoint];
           }
         geniusAjax = axios.CancelToken.source();
     
         const res = await axios.get(`/.netlify/functions/node-fetch/https://api.genius.com/${endpoint}`, {
             cancelToken: geniusAjax.token,
-            headers: { 'Authorization': `Bearer ${credentials.genius.access_token}` }
+            headers: { 'Authorization': `Bearer ${credentials.genius.access_token}` } 
         })
-        const data = await res.data;
+        const r = await res.data;
+        const data = await r.data;
         const response = await data.response;
         resources[endpoint] = response;
         return response;
@@ -119,8 +119,8 @@ async function fetchGenius(endpoint: string, errorRes: any): Promise<any> {
     }
 }
 
-export async function searchGenius(query: string): Promise<GeniusSearch> {
-    return await fetchGenius('search?q='+query, {hits: null})
+export async function searchTrackByArtist(query: string): Promise<GeniusSearch> {
+    return await fetchGenius('search/?q='+query, {hits: null, canceled: true})
 }
 
 export async function fetchArtist(artistId: string): Promise<GeniusArtist> {

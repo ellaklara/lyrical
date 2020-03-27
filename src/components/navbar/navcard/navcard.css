@@ -1,0 +1,21 @@
+.navcard-container {
+    display: flex;
+}
+
+.navcard {
+    display: flex;
+    justify-content: space-evenly;
+    color: var(--c-text-light);
+    width: 100px;
+    padding: 5px;
+}
+
+.navcard div {
+    flex: 8;
+}
+
+.navcard img {
+    height: 20px;
+    flex: 2;
+    padding-right: 5px;
+}

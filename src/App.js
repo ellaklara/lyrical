@@ -1,10 +1,32 @@
 import React, { useState } from 'react';
 import './App.css';
-import SearchBar from './components/search-bar/search-bar';
+import './theme/colors.css';
+import SearchArea from './components/search-area/search-area';
+import Navbar from './components/navbar/navbar';import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect
+} from "react-router-dom";
+import SongPage from './components/song-page/song-page';
+import './model/musixmatch/musixmatchFunctions'
 
 function App() {
   return (
-    <SearchBar/>
+    <div style={{display: 'flex', width: '100%', height: '100%'}}>
+      <Router>
+        <Navbar/>
+          <Switch>
+              <Route exact path='/'>
+                <SearchArea/>
+              </Route>
+              <Route path='/song'
+                render={(props) => <SongPage {...props} />} >
+               
+              </Route>
+          </Switch>
+        </Router>
+    </div>
   );
 }
 

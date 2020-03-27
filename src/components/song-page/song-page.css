@@ -1,0 +1,38 @@
+.song-page {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.song-header {
+    background-color: var(--c-primary);
+    border-right: 1px solid var(--c-primary-dark);
+    height: 100%;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    flex-direction: column;
+    flex: 8;
+}
+
+.song-details {
+    padding-top: 30px;
+}
+
+.song-header img {
+    width: 250px;
+    height: 250px;
+}
+
+textarea {
+    border: 0;
+    color: var(--c-text-light);
+    background-color: inherit;
+    resize: none;
+    width: 100%;
+    font-size: 1.2rem;
+    font-family: Arial;
+    padding: 20px;
+    
+    font-family: 'Varela Round', sans-serif;
+}

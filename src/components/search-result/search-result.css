@@ -3,13 +3,13 @@
     padding: 20px;
     height: 100px;
     display: flex;
-    background-color: #212121;
-    border-bottom: 1px solid #111;
+    background-color: var(--c-primary);
+    border-bottom: 1px solid var(--c-primary-dark);
     transition: hover 0.5s ease-in-out;
 }
 
 .search-result:hover {
-    background-color: #111;
+    background-color: var(--c-primary-dark);
 }
 
 .search-result img {
