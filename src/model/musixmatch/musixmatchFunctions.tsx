@@ -39,7 +39,11 @@ export async function getTrackLyrics(trackId: string): Promise<any> {
 }
 
 export async function getLyrics(artist: string, title: string) {
-    const track: any = await searchTrack(artist, title)
-    const lyrics = await getTrackLyrics(track.track_list[0].track.track_id)
-    return lyrics.lyrics.lyrics_body.substring(0, lyrics.lyrics.lyrics_body.indexOf('*******'));
+    try {   
+        const track: any = await searchTrack(artist, title)
+        const lyrics = await getTrackLyrics(track.track_list[0].track.track_id)
+        return lyrics.lyrics.lyrics_body.substring(0, lyrics.lyrics.lyrics_body.indexOf('*******'));
+    } catch {
+        return 'no lyrics found'
+    }
 }

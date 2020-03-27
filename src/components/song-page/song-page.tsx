@@ -1,9 +1,10 @@
 import React, { FC, useState, useEffect } from 'react';
 import MainArea from '../main-area/main-area';
-import { GeniusSong } from '../../model/genius/geniusFunctions'
 import './song-page.css'
-import { RouteComponentProps, Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { getLyrics } from '../../model/musixmatch/musixmatchFunctions';
+import { getSong, GeniusMedia } from '../../model/genius/geniusFunctions';
+import { GeniusSong } from '../../model/genius/geniusFunctions';
 
 type SongPageProps = {
     location: Link,
@@ -11,7 +12,23 @@ type SongPageProps = {
 }
 
 const SongPage: FC<SongPageProps> = (props) => {
+
+    interface ParamTypes {
+        songId: string
+      }
+    const { songId } = useParams<ParamTypes>()
+
     const [lyrics, setLyrics] = useState('')
+    const [song, setSong]: any = useState({
+        id: null,
+        song_art_image_url: null,
+        title: null,
+        primary_artist: {
+            name: null
+        },
+        media: [],
+    })
+
 
     useEffect(() => {
         (async function anyNameFunction() {
@@ -24,7 +41,15 @@ const SongPage: FC<SongPageProps> = (props) => {
                 }
                 return output;
             }
-            setLyrics(await getLyrics(props.location.state.song.primary_artist.name, cleanString(props.location.state.song.title)))
+            if(song.id) {
+                setLyrics(await getLyrics(song.primary_artist.name, cleanString(song.title)))
+            }
+        })();
+      }, [song]);
+
+    useEffect(() => {
+        (async function anyNameFunction() {
+            setSong(await getSong(songId))
         })();
       }, []);
 
@@ -32,10 +57,14 @@ const SongPage: FC<SongPageProps> = (props) => {
         <MainArea>
             <div className='song-page'>
                 <div className='song-header'>
-                    <img src={props.location.state.song.header_image_url}/>
-                    <div className='song-details'>
-                        {props.location.state.song.title}<br></br>
-                        {props.location.state.song.primary_artist.name}
+                    <img src={song.song_art_image_url}/>
+                    <div className='song-details'> 
+                        {song.title}<br/>
+                        {song.primary_artist.name}<br/>
+                        {song.media.map((m: GeniusMedia) =>
+                            <a href={m.url} target='_blank'>{m.provider}</a>
+                        )}
+                        
                     </div> 
                 </div>
                 

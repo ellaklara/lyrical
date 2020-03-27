@@ -1,5 +1,5 @@
 import React, { FC, useState, useEffect } from 'react';
-import { searchTrackByArtist } from '../../model/genius/geniusFunctions';
+import { searchSong } from '../../model/genius/geniusFunctions';
 import './search-area.css'
 import SearchResult from '../search-result/search-result';
 import Spinner from '../../assets/spinner.svg'
@@ -36,7 +36,7 @@ const SearchArea: FC<{}> = (props) => {
 
     const search = async (val: string) => {
         setLoading(true);
-        setResults(await searchTrackByArtist(val));
+        setResults(await searchSong(val));
     };
   
     const onChangeHandler = async (e: any)  => {

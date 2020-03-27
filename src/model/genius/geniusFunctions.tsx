@@ -13,7 +13,7 @@ type GeniusSearch = {
     ]
 }
 
-type GeniusMedia = {
+export type GeniusMedia = {
     native_uri?: string,
     provider: string,
     type: string,
@@ -119,14 +119,15 @@ async function fetchGenius(endpoint: string, errorRes: any): Promise<any> {
     }
 }
 
-export async function searchTrackByArtist(query: string): Promise<GeniusSearch> {
+export async function searchSong(query: string): Promise<GeniusSearch> {
     return await fetchGenius('search/?q='+query, {hits: null, canceled: true})
 }
 
-export async function fetchArtist(artistId: string): Promise<GeniusArtist> {
+export async function getArtist(artistId: string): Promise<GeniusArtist> {
     return await fetchGenius('artists/'+artistId, {artist: null});
 }
 
-export async function fetchSong(songId: string): Promise<GeniusSong> {
-    return await fetchGenius('songs/'+songId, {song: null});
+export async function getSong(songId: string): Promise<any> {
+    const s = await fetchGenius('songs/'+songId, {song: null});
+    return s.song;
 }

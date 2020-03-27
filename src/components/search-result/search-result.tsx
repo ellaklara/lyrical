@@ -1,7 +1,7 @@
 import React, { FC, useState, useEffect } from 'react';
 import './search-result.css'
 import Thumbnail from '../thumbnail/thumbnail';
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 type SearchResultProps = {
     result: any,
@@ -9,12 +9,7 @@ type SearchResultProps = {
 
 const SearchResult: FC<SearchResultProps> = (props) => {
     return (
-        <Link
-            to={{
-            pathname: '/song',
-            state: {
-              song: props.result
-            }}}>
+        <NavLink to={`/song/${props.result.id}`}>
             <li className='search-result' key={props.result.path}>
                 <Thumbnail src={props.result.song_art_image_thumbnail_url}/>
                 <div className='result-details'>
@@ -22,7 +17,7 @@ const SearchResult: FC<SearchResultProps> = (props) => {
                     {props.result.primary_artist.name}
                 </div>
             </li>
-        </Link>
+        </NavLink>
     );
 }
 

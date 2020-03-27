@@ -20,7 +20,7 @@ function App() {
               <Route exact path='/'>
                 <SearchArea/>
               </Route>
-              <Route path='/song'
+              <Route path='/song/:songId'
                 render={(props) => <SongPage {...props} />} >
                
               </Route>
