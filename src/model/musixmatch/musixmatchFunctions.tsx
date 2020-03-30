@@ -3,7 +3,7 @@ import credentials from '../../credentials/credentials.json';
 
 let musixmatchAjax: CancelTokenSource;
 const resources: any = {};
-async function fetchMusixmatch(endpoint: string, errorRes: any): Promise<any> { 
+async function fetchMusixmatch(endpoint: string): Promise<any> { 
     
     if (musixmatchAjax) {
         musixmatchAjax.cancel();
@@ -20,22 +20,27 @@ async function fetchMusixmatch(endpoint: string, errorRes: any): Promise<any> {
                 cancelToken: musixmatchAjax.token,
             }
         )
-        const data = await res.data;
-        const r = await data.data;
-        const message = await r.message;
-        const body = message.body;
-        resources[endpoint] = body;
-        return body;
-    } catch (error) {
-        return errorRes;
+        resources[endpoint] = res.data.message.body;
+        return res.data.message.body;
+    } catch (err) {
+        throw err;
     }
 }
 
 export async function searchTrack(artist: string, title: string): Promise<any> {
-    return await fetchMusixmatch(`track.search?q_artist=${artist}&q_track=${title}`, {hits: null, canceled: true})
+    try {
+        return await fetchMusixmatch(`track.search?q_artist=${artist}&q_track=${title}`)
+    } catch (err) {
+        throw err;
+    }
 }
+
 export async function getTrackLyrics(trackId: string): Promise<any> {
-    return await fetchMusixmatch(`track.lyrics.get?track_id=${trackId}`, {hits: null, canceled: true})
+    try {
+        return await fetchMusixmatch(`track.lyrics.get?track_id=${trackId}`)
+    } catch (err) {
+        throw err;
+    }
 }
 
 export async function getLyrics(artist: string, title: string) {
@@ -44,6 +49,6 @@ export async function getLyrics(artist: string, title: string) {
         const lyrics = await getTrackLyrics(track.track_list[0].track.track_id)
         return lyrics.lyrics.lyrics_body.substring(0, lyrics.lyrics.lyrics_body.indexOf('*******'));
     } catch {
-        return 'no lyrics found'
+        return 'no lyrics found';
     }
 }

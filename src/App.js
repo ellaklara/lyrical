@@ -1,15 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './App.css';
 import './theme/colors.css';
 import SearchArea from './components/search-area/search-area';
-import Navbar from './components/navbar/navbar';import {
+import Navbar from './components/navbar/navbar';
+import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Redirect
 } from "react-router-dom";
 import SongPage from './components/song-page/song-page';
-import './model/musixmatch/musixmatchFunctions'
 
 function App() {
   return (

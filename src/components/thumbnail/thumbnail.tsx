@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect } from 'react';
+import React, { FC, useState } from 'react';
 import './thumbnail.css'
 import Spinner from '../../assets/spinner.svg'
 
@@ -11,7 +11,7 @@ const Thumbnail: FC<ThumbnailProps> = (props) => {
     const [loading, setLoading] = useState(true);
     return (
         <div className='thumbnail'>
-            <img src={loading ? Spinner : props.src} onLoad={()=>setLoading(false)}/>
+            <img alt='thumbnail' src={loading ? Spinner : props.src} onLoad={()=>setLoading(false)}/>
         </div>
     );
 }

@@ -1,17 +1,11 @@
-import React, { FC, useState, useEffect } from 'react';
+import React, { FC, useState, useEffect, Fragment } from 'react';
 import MainArea from '../main-area/main-area';
 import './song-page.css'
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { getLyrics } from '../../model/musixmatch/musixmatchFunctions';
 import { getSong, GeniusMedia } from '../../model/genius/geniusFunctions';
-import { GeniusSong } from '../../model/genius/geniusFunctions';
 
-type SongPageProps = {
-    location: Link,
-    song: GeniusSong
-}
-
-const SongPage: FC<SongPageProps> = (props) => {
+const SongPage: FC<{}> = (props) => {
 
     interface ParamTypes {
         songId: string
@@ -51,27 +45,25 @@ const SongPage: FC<SongPageProps> = (props) => {
         (async function anyNameFunction() {
             setSong(await getSong(songId))
         })();
-      }, []);
+      }, [songId]);
 
     return (
         <MainArea>
             <div className='song-page'>
                 <div className='song-header'>
-                    <img src={song.song_art_image_url}/>
+                    <img alt={song.name} src={song.song_art_image_url}/>
                     <div className='song-details'> 
                         {song.title}<br/>
                         {song.primary_artist.name}<br/>
                         {song.media.map((m: GeniusMedia) =>
-                            <a href={m.url} target='_blank'>{m.provider}</a>
+                            <Fragment key={m.url}>
+                                <a href={m.url} target='_blank' rel='noopener noreferrer'>{m.provider}</a><br/>
+                            </Fragment>
                         )}
                         
                     </div> 
                 </div>
-                
-                <textarea value={lyrics}/>
-                <div>
-                    test
-                </div>
+                <textarea defaultValue={lyrics}/>
             </div>  
         </MainArea>
     );

@@ -16,17 +16,13 @@ const SearchArea: FC<{}> = (props) => {
 
     useEffect(() => {
         if(results.hits) {
-            if (results.canceled) {
-                setCont(<></>)
-            } else if (value === '') {
-                setCont(initialCont)
-            } else if(results.hits.length === 0) {
+            if(results.hits.length === 0) {
                 setCont(<div className='center'>No results</div>)
             } else
             setCont(
                 <ul className='search-results'>
                     {results.hits.map((result: any) =>
-                        <SearchResult result={result.result}/>
+                        <SearchResult key={result.result.id} result={result.result}/>
                     )}
                 </ul>
             );
@@ -45,7 +41,6 @@ const SearchArea: FC<{}> = (props) => {
     };
 
     return (
-        
         <div style={{display: 'flex', width: '100%', height: '100%', flexDirection: 'column'}}>
             <div className='search-bar-container'>
                 <div className='search-bar'>

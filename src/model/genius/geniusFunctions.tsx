@@ -1,6 +1,5 @@
 import axios, { CancelTokenSource } from 'axios';
 import credentials from '../../credentials/credentials.json';
-const proxy_url = 'https://cors-anywhere.herokuapp.com/'
 
 type GeniusSearch = {
     hits: [
@@ -94,7 +93,7 @@ export type GeniusSong = {
 
 let geniusAjax: CancelTokenSource;
 const resources: any = {};
-async function fetchGenius(endpoint: string, errorRes: any): Promise<any> { 
+async function fetchGenius(endpoint: string): Promise<any> { 
     
     if (geniusAjax) {
         geniusAjax.cancel();
@@ -109,25 +108,34 @@ async function fetchGenius(endpoint: string, errorRes: any): Promise<any> {
             cancelToken: geniusAjax.token,
             headers: { 'Authorization': `Bearer ${credentials.genius.access_token}` } 
         })
-        const r = await res.data;
-        const data = await r.data;
-        const response = await data.response;
-        resources[endpoint] = response;
-        return response;
-    } catch (error) {
-        return errorRes;
+        resources[endpoint] = res.data.response;
+        return res.data.response;
+    } catch (err) {
+        throw err; 
     }
 }
 
-export async function searchSong(query: string): Promise<GeniusSearch> {
-    return await fetchGenius('search/?q='+query, {hits: null, canceled: true})
+export async function searchSong(query: string): Promise<GeniusSearch | {hits: null}> {
+    try {
+        return await fetchGenius('search/?q='+query)
+    } catch (err) {
+        return {hits: null};
+    }
 }
 
 export async function getArtist(artistId: string): Promise<GeniusArtist> {
-    return await fetchGenius('artists/'+artistId, {artist: null});
+    try {
+        return await fetchGenius('artists/'+artistId);
+    } catch (err) {
+        throw err;
+    }
 }
 
-export async function getSong(songId: string): Promise<any> {
-    const s = await fetchGenius('songs/'+songId, {song: null});
-    return s.song;
+export async function getSong(songId: string): Promise<GeniusSong> {
+    try {
+        const songRes = await fetchGenius('songs/'+songId);
+        return songRes.song;
+    } catch (err) {
+        throw err;
+    }
 }

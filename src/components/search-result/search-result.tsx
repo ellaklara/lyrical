@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect } from 'react';
+import React, { FC } from 'react';
 import './search-result.css'
 import Thumbnail from '../thumbnail/thumbnail';
 import { NavLink } from 'react-router-dom'
