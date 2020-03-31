@@ -1,18 +1,16 @@
 .song-page {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     width: 100%;
 }
 
 .song-header {
-    background-color: var(--c-primary);
-    border-right: 1px solid var(--c-primary-dark);
-    height: 100%;
+    background-color: var(--c-primary-dark);
+    border-bottom: 1px solid var(--c-primary);
     display: flex;
     align-items: center;
     width: 100%;
-    flex-direction: column;
-    flex: 8;
+    flex: 2;
 }
 
 .song-image {
@@ -21,18 +19,88 @@
 }
 
 .song-details {
-    padding-top: 30px;
+    font-family: 'Varela Round', sans-serif;
+    padding: 4em;
+    width: 100%;
+}
+
+.song-title {
+    font-size: 2.5em;
+}
+
+.song-artist {
+    font-size: 2em;
+}
+
+.song-media {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-top: 1px solid var(--c-primary-dark);
+    width: 100%;
+}
+
+.song-media a {
+    margin: 10px;
+    border-bottom: 5px solid var(--c-text-light);
+}
+
+.lyrics-cont {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.song-navbar {
+    display: flex;
+    width: 100%;
+    height: 50px;
+    background-color: var(--c-primary-dark);
+    border-bottom: 1px solid var(--c-primary);
+    text-align: center;
+    line-height: 50px;
+}
+
+.song-navbar .navbar-btn {
+    height: 100%;
+    flex: 1;
+    border-right: 1px solid var(--c-primary);
+    font-family: 'Varela Round', sans-serif;
+}
+
+.song-navbar .navbar-btn.active {
+    background-color: var(--c-primary);
+}
+
+.song-content {
+    display: flex;
+    justify-content: center;
+    flex: 8;
+    width: 100%;
+    flex-direction: row;
+}
+
+.divider {
+    width: 2em;
+    border: 1px solid var(--c-primary-dark);
+}
+
+.music-video-container {
+    padding: 2em;
+}
+
+.music-video {
 }
 
 textarea {
+    flex: 1;
     border: 0;
     color: var(--c-text-light);
     background-color: inherit;
     resize: none;
-    width: 100%;
     font-size: 1.2rem;
     font-family: Arial;
-    padding: 20px;
-    
     font-family: 'Varela Round', sans-serif;
+    padding: 2em 4em 2em 4em;
 }
