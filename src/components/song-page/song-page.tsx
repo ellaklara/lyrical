@@ -3,59 +3,53 @@ import MainArea from '../main-area/main-area';
 import './song-page.css'
 import { useParams } from 'react-router-dom';
 import { getLyrics } from '../../model/musixmatch/musixmatchFunctions';
-import { getSong, GeniusMedia } from '../../model/genius/geniusFunctions';
+import { GeniusMedia, GeniusSong, getSongMedia } from '../../model/genius/geniusFunctions';
+import { connect } from 'react-redux';
+import { AppState } from '../../model/redux/store';
+import { setCurrentSong } from '../../model/redux/songState';
+import LoadingImg from '../loading-img/loading-img';
 
-const SongPage: FC<{}> = (props) => {
+const SongPage: FC<{song: GeniusSong, updateSong: Function}> = (props) => {
 
     interface ParamTypes {
         songId: string
       }
     const { songId } = useParams<ParamTypes>()
 
-    const [lyrics, setLyrics] = useState('')
-    const [song, setSong]: any = useState({
-        id: null,
-        song_art_image_url: null,
-        title: null,
-        primary_artist: {
-            name: null
-        },
-        media: [],
-    })
-
+    const [lyrics, setLyrics] =  useState(props.song.lyrics ? props.song.lyrics : '')
+    const [media, setMedia]: any = useState(props.song.media ? props.song.media : [])
 
     useEffect(() => {
-        (async function anyNameFunction() {
-            function cleanString(input: string) {
-                var output = "";
-                for (var i=0; i<input.length; i++) {
-                    if (input.charCodeAt(i) <= 127) {
-                        output += input.charAt(i);
-                    }
-                }
-                return output;
-            }
-            if(song.id) {
-                setLyrics(await getLyrics(song.primary_artist.name, cleanString(song.title)))
+        (async function fetchSongDetails() {
+            if(props.song) {
+                setLyrics(await getLyrics(props.song.primary_artist.name, props.song.title))
             }
         })();
-      }, [song]);
+
+        (async function fetchMedia() {
+            setMedia(await getSongMedia(songId))
+        })();
+      }, [props.song]);
 
     useEffect(() => {
-        (async function anyNameFunction() {
-            setSong(await getSong(songId))
-        })();
-      }, [songId]);
+        props.updateSong({...props.song, media})
+    }, [media])
+
+    useEffect(() => {
+        props.updateSong({...props.song, lyrics})
+    }, [lyrics])
 
     return (
         <MainArea>
             <div className='song-page'>
                 <div className='song-header'>
-                    <img alt={song.name} src={song.song_art_image_url}/>
+                    <div className='song-image'>
+                        <LoadingImg alt={props.song.title} src={props.song.song_art_image_url}/>
+                    </div>
                     <div className='song-details'> 
-                        {song.title}<br/>
-                        {song.primary_artist.name}<br/>
-                        {song.media.map((m: GeniusMedia) =>
+                        {props.song.title}<br/>
+                        {props.song.primary_artist.name}<br/>
+                        {media.map((m: GeniusMedia) =>
                             <Fragment key={m.url}>
                                 <a href={m.url} target='_blank' rel='noopener noreferrer'>{m.provider}</a><br/>
                             </Fragment>
@@ -69,4 +63,15 @@ const SongPage: FC<{}> = (props) => {
     );
 }
 
-export default SongPage;
+const mapStateToProps = (state: AppState, ownProps: any): any => ({
+    song: state.songState.current
+});
+
+const mapDispatchToProps = (dispatch: any): any => ({
+    updateSong: (song: GeniusSong) => {dispatch(setCurrentSong(song))}
+});
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(SongPage);

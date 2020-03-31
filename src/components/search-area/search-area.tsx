@@ -1,28 +1,35 @@
 import React, { FC, useState, useEffect } from 'react';
-import { searchSong } from '../../model/genius/geniusFunctions';
+import { searchSong, GeniusSearch } from '../../model/genius/geniusFunctions';
 import './search-area.css'
 import SearchResult from '../search-result/search-result';
 import Spinner from '../../assets/spinner.svg'
 import MainArea from '../main-area/main-area';
+import { AppState } from '../../model/redux/store';
+import { setSearchResults, SearchState } from '../../model/redux/searchState';
+import { connect } from 'react-redux';
 
-const SearchArea: FC<{}> = (props) => {
+const SearchArea: FC<{searchState: SearchState, setSearchState: Function}> = (props) => {
 
-    const initialCont = <div className='center'>Search for a song...</div>;
+    const initialCont = <>Search for a song...</>;
 
     const [loading, setLoading] = useState(false);
-    const [results, setResults]: any = useState({response: null});
-    const [value, setValue] = useState('');
+    const [results, setResults]: any = useState(props.searchState.results);
+    const [value, setValue] = useState(props.searchState.value);
     const [cont, setCont] = useState(initialCont);
 
     useEffect(() => {
         if(results.hits) {
-            if(results.hits.length === 0) {
-                setCont(<div className='center'>No results</div>)
+            props.setSearchState(value, results);
+            if(value === '') {
+                setCont(initialCont);
+            }
+            else if(results.hits.length === 0) {
+                setCont(<>No results</>)
             } else
             setCont(
                 <ul className='search-results'>
-                    {results.hits.map((result: any) =>
-                        <SearchResult key={result.result.id} result={result.result}/>
+                    {results.hits.map((song: any) =>
+                        <SearchResult key={song.result.id} song={song.result}/>
                     )}
                 </ul>
             );
@@ -41,7 +48,7 @@ const SearchArea: FC<{}> = (props) => {
     };
 
     return (
-        <div style={{display: 'flex', width: '100%', height: '100%', flexDirection: 'column'}}>
+        <div className='search-area'>
             <div className='search-bar-container'>
                 <div className='search-bar'>
                     <input
@@ -53,10 +60,23 @@ const SearchArea: FC<{}> = (props) => {
                 </div>
             </div>
             <MainArea>
-                {loading ? <div className='center' ><img src={Spinner}></img></div> : cont}
+                <div className='center'>
+                    {loading ? <img src={Spinner}></img> : cont}
+                </div>
             </MainArea>
         </div>
     );
 }
 
-export default SearchArea;
+const mapStateToProps = (state: AppState, ownProps: any): any => ({
+    searchState: state.searchState
+});
+
+const mapDispatchToProps = (dispatch: any): any => ({
+    setSearchState: (value: string, results: GeniusSearch) => {dispatch(setSearchResults(value, results))}
+});
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(SearchArea);

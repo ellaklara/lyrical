@@ -1,3 +1,10 @@
+.search-area {
+    display: flex;
+    width: 100%;
+    height: 100%; 
+    flex-direction: column;
+}
+
 .search-bar-container {
     display: flex;
     width: 100%;

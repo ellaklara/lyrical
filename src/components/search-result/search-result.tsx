@@ -1,24 +1,44 @@
 import React, { FC } from 'react';
+import { connect } from 'react-redux';
 import './search-result.css'
 import Thumbnail from '../thumbnail/thumbnail';
 import { NavLink } from 'react-router-dom'
+import { GeniusSong } from '../../model/genius/geniusFunctions';
+import { setCurrentSong } from '../../model/redux/songState';
+import { Dispatch } from 'redux';
+import { AppState } from '../../model/redux/store';
 
 type SearchResultProps = {
-    result: any,
+    song: GeniusSong,
 }
 
-const SearchResult: FC<SearchResultProps> = (props) => {
+export interface SearchResultPropsActions {
+    onClick: any
+}
+
+const SearchResult: FC<SearchResultProps & SearchResultPropsActions> = (props) => {
     return (
-        <NavLink to={`/song/${props.result.id}`}>
-            <li className='search-result' key={props.result.path}>
-                <Thumbnail src={props.result.song_art_image_thumbnail_url}/>
+        <NavLink to={`/song/${props.song.id}`} >
+            <li className='search-result' key={props.song.path} onClick={() => props.onClick(props.song)}>
+                <Thumbnail src={props.song.song_art_image_thumbnail_url}/>
                 <div className='result-details'>
-                    {props.result.title}<br/>
-                    {props.result.primary_artist.name}
+                    {props.song.title}<br/>
+                    {props.song.primary_artist.name}
                 </div>
             </li>
         </NavLink>
     );
 }
 
-export default SearchResult;
+const mapStateToProps = (state: AppState, ownProps: any): any => ({
+    songState: state.songState
+});
+
+const mapDispatchToProps = (dispatch: any): any => ({
+    onClick: (song: GeniusSong) => {dispatch(setCurrentSong(song))}
+});
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(SearchResult);

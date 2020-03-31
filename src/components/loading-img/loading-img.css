@@ -1,0 +1,21 @@
+.loading-img-cont {
+    display: inline-flex;
+    text-align: center;
+    justify-content: center;
+    height: inherit;
+    width: inherit;
+}
+
+.loading-img {
+    display: flex;
+    justify-content: center;
+}
+
+.loading-img img {
+    width: 1.6em !important;
+}
+
+.loading-img img.loaded {
+    width: 100% !important;
+    height: 100% !important;
+}

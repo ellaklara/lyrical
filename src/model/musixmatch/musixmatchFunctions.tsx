@@ -44,11 +44,14 @@ export async function getTrackLyrics(trackId: string): Promise<any> {
 }
 
 export async function getLyrics(artist: string, title: string) {
+    //var regExp = /\(([^)]+)\)/;
+    //var matches = regExp.exec(title);
     try {   
         const track: any = await searchTrack(artist, title)
+        console.log(track)
         const lyrics = await getTrackLyrics(track.track_list[0].track.track_id)
         return lyrics.lyrics.lyrics_body.substring(0, lyrics.lyrics.lyrics_body.indexOf('*******'));
-    } catch {
-        return 'no lyrics found';
+    } catch (err) {
+        throw err;
     }
 }

@@ -1,7 +1,7 @@
 import axios, { CancelTokenSource } from 'axios';
 import credentials from '../../credentials/credentials.json';
 
-type GeniusSearch = {
+export type GeniusSearch = {
     hits: [
         {
             highlights: any,
@@ -88,7 +88,8 @@ export type GeniusSong = {
     verified_annotations_by: any,
     verified_contributors: any
     verified_lyrics_by: any,
-    writer_artists: GeniusArtist[]
+    writer_artists: GeniusArtist[],
+    lyrics?: string
 }
 
 let geniusAjax: CancelTokenSource;
@@ -139,3 +140,13 @@ export async function getSong(songId: string): Promise<GeniusSong> {
         throw err;
     }
 }
+
+export async function getSongMedia(songId: string): Promise<GeniusMedia> {
+    try {
+        const songRes = await fetchGenius('songs/'+songId);
+        return songRes.song.media;
+    } catch (err) {
+        throw err;
+    }
+}
+
