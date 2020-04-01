@@ -55,15 +55,19 @@ function cleanString(input: string) {
 }
 
 export async function getLyrics(artist: string, title: string) {
-    //var regExp = /\(([^)]+)\)/;
-    //var matches = regExp.exec(title);
-
-    
     try {   
-        const track: any = await searchTrack(artist, cleanString(title))
-        return await Promise.all(track.track_list.map(async (t: any) =>
-            await getTrackLyrics(t.track.track_id)
-        ))
+        const tracks: any = await searchTrack(artist, cleanString(title))
+        const filteredTracks = tracks.track_list.filter(function (t: any) {
+            return t.track.has_lyrics === 1;
+        });
+        const lyrics = await Promise.all(filteredTracks.map(async (t: any) => {
+            return await getTrackLyrics(t.track.track_id);
+        }));
+        return lyrics.filter((thing: any, index: any, self: any) =>
+            index === self.findIndex((t: any) => (
+                t.lyrics.lyrics_body === thing.lyrics.lyrics_body
+            ))
+        )
     } catch (err) {
         throw err;
     }

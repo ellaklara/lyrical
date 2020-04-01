@@ -1,0 +1,18 @@
+.lyrics-cont {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 6;
+}
+
+textarea {
+    flex: 1;
+    border: 0;
+    color: var(--c-text-light);
+    background-color: inherit;
+    resize: none;
+    font-size: 1.2rem;
+    font-family: Arial;
+    font-family: 'Varela Round', sans-serif;
+    padding: 2em 4em 2em 4em;
+}

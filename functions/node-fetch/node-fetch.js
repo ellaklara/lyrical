@@ -7,12 +7,21 @@ exports.handler = async function(event, context) {
       endpoint += `${key}=${value}&`
     }
     const response = await fetch(endpoint, {
-      headers: { 'Authorization': event.headers.authorization } 
+      headers: { 
+        'Authorization': event.headers.authorization,
+        //'Content-Type': event.header.contentType 
+      } 
     })
     if (!response.ok) {
       return { statusCode: response.status, body: response.statusText }
     }
-    const data = await response.json()
+    const contentType = response.headers.get("content-type");
+    let data;
+    if (contentType && contentType.indexOf("application/json") !== -1) {
+      data = await response.json();
+    } else {
+      data = await response.text();
+    }
     return {
       statusCode: 200,
       body: JSON.stringify(data)

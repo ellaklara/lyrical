@@ -46,11 +46,6 @@
     border-bottom: 5px solid var(--c-text-light);
 }
 
-.lyrics-cont {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-}
 
 .song-navbar {
     display: flex;
@@ -84,23 +79,4 @@
 .divider {
     width: 2em;
     border: 1px solid var(--c-primary-dark);
-}
-
-.music-video-container {
-    padding: 2em;
-}
-
-.music-video {
-}
-
-textarea {
-    flex: 1;
-    border: 0;
-    color: var(--c-text-light);
-    background-color: inherit;
-    resize: none;
-    font-size: 1.2rem;
-    font-family: Arial;
-    font-family: 'Varela Round', sans-serif;
-    padding: 2em 4em 2em 4em;
 }
