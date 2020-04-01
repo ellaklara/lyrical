@@ -1,0 +1,22 @@
+.search-result {
+    cursor: pointer;
+    padding: 20px;
+    height: 100px;
+    display: flex;
+    background-color: var(--c-primary);
+    border-bottom: 1px solid var(--c-primary-dark);
+    transition: hover 0.5s ease-in-out;
+}
+
+.search-result:hover {
+    background-color: var(--c-primary-dark);
+}
+
+.search-result img {
+    height: inherit;
+    border-radius: 3px;
+}
+
+.result-details {
+    padding: 20px;
+}

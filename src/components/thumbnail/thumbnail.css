@@ -1,0 +1,8 @@
+.thumbnail {
+    height: 100px;
+    width: 100px;
+    background-color: var(--c-primary-dark);
+    border-radius: 5px;
+}
+
+

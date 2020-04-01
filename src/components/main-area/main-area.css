@@ -1,0 +1,9 @@
+
+.main-area {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    background-color: var(--c-primary);
+    overflow: auto;
+    color: var(--c-text-light);
+}
