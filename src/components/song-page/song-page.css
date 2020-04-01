@@ -24,6 +24,19 @@
     width: 100%;
 }
 
+.add-song {
+    cursor: pointer;
+    padding: 0.2em;
+}
+
+.add-song img {
+    transition: transform 0.2s ease-in-out;
+}
+
+.add-song img.added {
+    transform: rotate(45deg);
+}
+
 .song-title {
     font-size: 2.5em;
 }

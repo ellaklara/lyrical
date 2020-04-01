@@ -1,6 +1,8 @@
 .media-container {
+    display: flex;
+    justify-content: center;
     padding: 2em;
-    flex: 3;
+    flex: 4;
 }
 
 .music-video {

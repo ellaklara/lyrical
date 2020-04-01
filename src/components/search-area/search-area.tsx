@@ -1,5 +1,5 @@
 import React, { FC, useState, useEffect } from 'react';
-import { searchSong, GeniusSearch } from '../../model/genius/geniusFunctions';
+import { searchSong } from '../../model/genius/geniusFunctions';
 import './search-area.css'
 import SearchResult from '../search-result/search-result';
 import Spinner from '../../assets/spinner.svg'
@@ -7,6 +7,7 @@ import MainArea from '../main-area/main-area';
 import { AppState } from '../../model/redux/store';
 import { setSearchResults, SearchState } from '../../model/redux/searchState';
 import { connect } from 'react-redux';
+import { GeniusSearch } from '../../model/genius/geniusTypes';
 
 const SearchArea: FC<{searchState: SearchState, setSearchState: Function}> = (props) => {
 

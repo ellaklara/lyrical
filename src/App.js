@@ -9,6 +9,7 @@ import {
   Route,
 } from "react-router-dom";
 import SongPage from './components/song-page/song-page';
+import Library from './components/library/library';
 
 function App() {
   return (
@@ -21,7 +22,9 @@ function App() {
               </Route>
               <Route path='/song/:songId'
                 render={(props) => <SongPage {...props} />} >
-               
+              </Route>
+              <Route path='/library'>
+                <Library/>
               </Route>
           </Switch>
         </Router>

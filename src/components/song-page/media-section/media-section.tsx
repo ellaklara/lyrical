@@ -1,34 +1,41 @@
 import React, { FC, useState, useEffect } from 'react';
 import Spinner from '../../../assets/spinner.svg';
 import './media-section.css';
-import { GeniusSong, getSongMedia, GeniusMedia } from '../../../model/genius/geniusFunctions';
+import { getSongMedia } from '../../../model/genius/geniusFunctions';
 import YouTube from 'react-youtube';
+import { GeniusSong, GeniusMedia } from '../../../model/genius/geniusTypes';
 
 const MediaSection: FC<{song: GeniusSong, updateSong: Function}> = (props) => {
 
-    const [media, setMedia]: any = useState(props.song.media ? props.song.media : [])
-    const [musicVideo, setMusicVideo]: any = useState(<></>)
+    const [media, setMedia]: any = useState([])
+    const [musicVideo, setMusicVideo]: any = useState(<img src={Spinner}/>)
 
     useEffect(() => {
         (async function fetchMedia() {
-            setMedia(await getSongMedia(props.song.id.toString()))
+            try {
+                setMedia(await getSongMedia(props.song.id.toString()))
+            } catch {
+                
+            }
         })();
-      }, [props.song]);
+      });
 
     useEffect(() => {
-        props.updateSong({...props.song, media})
         media.forEach((m: GeniusMedia) => {
             if(m.provider === 'youtube') {
-                setMusicVideo(<YouTube videoId={m.url.replace('http://www.youtube.com/watch?v=', '')}/>)
+                setMusicVideo(
+                    <div className='music-video'>
+                        <YouTube videoId={m.url.replace('http://www.youtube.com/watch?v=', '')}/>
+                    </div>
+                )
             }
         });
+        props.updateSong({...props.song, media})
     }, [media])
 
     return (
         <div className='media-container'>
-            <div className='music-video'>
-                {musicVideo}
-            </div>
+            {musicVideo}
         </div>
     );
 }

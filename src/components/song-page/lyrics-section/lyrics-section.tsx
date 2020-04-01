@@ -1,7 +1,7 @@
 import React, { FC, useState, useEffect } from 'react';
 import Spinner from '../../../assets/spinner.svg';
 import './lyrics-section.css';
-import { GeniusSong } from '../../../model/genius/geniusFunctions';
+import { GeniusSong } from '../../../model/genius/geniusTypes';
 import { scrapeGeniusLyrics } from '../../../model/genius/geniusLyrics';
 
 const LyricsSection: FC<{song: GeniusSong, updateSong: Function}> = (props) => {
@@ -17,12 +17,18 @@ const LyricsSection: FC<{song: GeniusSong, updateSong: Function}> = (props) => {
       }, [props.song]);
 
     function updateLyrics(lyrics: string): void {
-        props.updateSong({...props.song, ...{lyrics: lyrics}})
+        props.updateSong({...props.song, lyrics})
     }
+
+    useEffect(() => {
+        (async function updateSongLyrics() {
+            updateLyrics(lyrics);
+        })();
+      }, [lyrics]);
 
     return (
         <div className='lyrics-cont'>
-            {lyrics === '' ? <img src={Spinner}/> : <textarea spellCheck='false' readOnly={true} defaultValue={lyrics} onChange={(e) => updateLyrics(e.target.value)}/>}
+            {lyrics === '' ? <img src={Spinner}/> : <textarea spellCheck='false' defaultValue={lyrics} onChange={(e) => updateLyrics(e.target.value)}/>}
         </div>
     );
 }

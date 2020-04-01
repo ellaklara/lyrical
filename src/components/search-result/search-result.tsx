@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import './search-result.css'
 import Thumbnail from '../thumbnail/thumbnail';
 import { NavLink } from 'react-router-dom'
-import { GeniusSong } from '../../model/genius/geniusFunctions';
+import { GeniusSong } from '../../model/genius/geniusTypes';
 import { setCurrentSong } from '../../model/redux/songState';
 import { Dispatch } from 'redux';
 import { AppState } from '../../model/redux/store';
