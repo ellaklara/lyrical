@@ -23,6 +23,7 @@ export type AppState = ReturnType<typeof rootReducer>;
 const persistConfig = {
     key: 'root',
     storage,
+    blacklist: ['searchState']
 }
    
 const persistedReducer = persistReducer(persistConfig, rootReducer)

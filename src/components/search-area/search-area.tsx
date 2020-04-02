@@ -8,21 +8,22 @@ import { AppState } from '../../model/redux/store';
 import { setSearchResults, SearchState } from '../../model/redux/searchState';
 import { connect } from 'react-redux';
 import { GeniusSearch } from '../../model/genius/geniusTypes';
+import AreaHeader from '../main-area/area-header/area-header';
+import SearchBar from '../search-bar/search-bar';
+import Container from '../container/container';
 
 const SearchArea: FC<{searchState: SearchState, setSearchState: Function}> = (props) => {
-
-    const initialCont = <>Search for a song...</>;
 
     const [loading, setLoading] = useState(false);
     const [results, setResults]: any = useState(props.searchState.results);
     const [value, setValue] = useState(props.searchState.value);
-    const [cont, setCont] = useState(initialCont);
+    const [cont, setCont] = useState(<></>);
 
     useEffect(() => {
         if(results.hits) {
             props.setSearchState(value, results);
             if(value === '') {
-                setCont(initialCont);
+                setCont(<>Search for a song...</>);
             }
             else if(results.hits.length === 0) {
                 setCont(<>No results</>)
@@ -35,6 +36,8 @@ const SearchArea: FC<{searchState: SearchState, setSearchState: Function}> = (pr
                 </ul>
             );
             setLoading(false);
+        } else if (value === '') {
+            setCont(<>Search for a song...</>);
         }
     },[results])
 
@@ -49,23 +52,16 @@ const SearchArea: FC<{searchState: SearchState, setSearchState: Function}> = (pr
     };
 
     return (
-        <div className='search-area'>
-            <div className='search-bar-container'>
-                <div className='search-bar'>
-                    <input
-                    className={`search-bar-input ${loading ? 'loading' : ''}`}
-                    value={value}
-                    onChange={e => onChangeHandler(e)}
-                    placeholder="search me"
-                    />
-                </div>
-            </div>
+        <Container>
+            <AreaHeader>
+                <SearchBar value={value} loading={loading} onChangeHandler={onChangeHandler} placeholder='search songs'/>
+            </AreaHeader>
             <MainArea>
                 <div className='center'>
                     {loading ? <img src={Spinner}></img> : cont}
                 </div>
             </MainArea>
-        </div>
+        </Container>
     );
 }
 

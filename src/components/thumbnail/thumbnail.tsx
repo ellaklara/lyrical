@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
 import './thumbnail.css';
 import LoadingImg from '../loading-img/loading-img';
 

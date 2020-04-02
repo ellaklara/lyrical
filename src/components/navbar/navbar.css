@@ -16,6 +16,7 @@
 }
 
 .navbar-header {
+    display: inline-flex;
     height: 100px;
     border-bottom: 1px solid var(--c-primary);
     transition: background-color 0.5s ease-in-out;
@@ -27,7 +28,7 @@
 
 .logo {
     font-family: 'Varela Round', sans-serif;
-    font-size: 1.7rem;
+    font-size: 1.7em;
     user-select: none;
     -webkit-user-select: none;
 }

@@ -1,4 +1,4 @@
-import { GeniusSearch, GeniusSong } from "../genius/geniusTypes";
+import { GeniusSearch } from "../genius/geniusTypes";
 
 export interface SearchState {
     value: string,

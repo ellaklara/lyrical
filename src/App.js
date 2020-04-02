@@ -7,6 +7,7 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
+  Redirect,
 } from "react-router-dom";
 import SongPage from './components/song-page/song-page';
 import Library from './components/library/library';
@@ -18,10 +19,13 @@ function App() {
         <Navbar/>
           <Switch>
               <Route exact path='/'>
-                <SearchArea/>
+                <Redirect to='/search'/>
               </Route>
               <Route path='/song/:songId'
                 render={(props) => <SongPage {...props} />} >
+              </Route>
+              <Route path='/search'>
+                <SearchArea/>
               </Route>
               <Route path='/library'>
                 <Library/>

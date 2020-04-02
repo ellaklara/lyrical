@@ -6,4 +6,5 @@
     background-color: var(--c-primary);
     overflow: auto;
     color: var(--c-text-light);
+    flex-direction: column;
 }

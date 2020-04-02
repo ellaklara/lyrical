@@ -5,7 +5,6 @@ import Thumbnail from '../thumbnail/thumbnail';
 import { NavLink } from 'react-router-dom'
 import { GeniusSong } from '../../model/genius/geniusTypes';
 import { setCurrentSong } from '../../model/redux/songState';
-import { Dispatch } from 'redux';
 import { AppState } from '../../model/redux/store';
 
 type SearchResultProps = {

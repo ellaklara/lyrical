@@ -8,7 +8,7 @@ import { GeniusSong, GeniusMedia } from '../../../model/genius/geniusTypes';
 const MediaSection: FC<{song: GeniusSong, updateSong: Function}> = (props) => {
 
     const [media, setMedia]: any = useState([])
-    const [musicVideo, setMusicVideo]: any = useState(<img src={Spinner}/>)
+    const [musicVideo, setMusicVideo]: any = useState(<img alt='spinner' src={Spinner}/>)
 
     useEffect(() => {
         (async function fetchMedia() {
