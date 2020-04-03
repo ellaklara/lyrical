@@ -2,9 +2,18 @@
     --c-primary: #161516;
     
     --c-primary: #1a1a1a;
+    --c-primary-darker: #000;
     --c-primary-dark: #111;
-    --c-primary-gray: #313131;
+    --c-primary-dim: #313131;
     --c-primary-light: #a2a2a2;
+    --c-main-text: #fff;
 
-    --c-text-light: #fff;
+    /*
+    --c-primary: #fff;
+    --c-primary-darker: #c4c8d1;
+    --c-primary-dark: #f7f8fa;
+    --c-primary-dim: #edf0f5;
+    --c-primary-light: #fff;
+    --c-main-text: #000;
+    */
 }

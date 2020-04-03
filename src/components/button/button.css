@@ -1,0 +1,19 @@
+.button {
+    padding: 10px 15px;
+    border-radius: 5px;
+    background-color: var(--c-primary);
+    box-shadow: var(--c-primary-dark);
+
+    cursor: pointer;
+    transition: all 0.25s;
+    text-align: center;
+    font-weight: bold;
+}
+
+.button:hover {
+    opacity: 0.9;
+}
+
+.button-compact {
+    display: inline-block;
+}

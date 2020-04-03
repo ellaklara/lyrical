@@ -5,7 +5,7 @@
     width: 200px;
     background-color: var(--c-primary-dark);
     border-right: 1px solid var(--c-primary);
-    color: var(--c-text-light);
+    color: var(--c-main-text);
 }
 
 .navbar-header, .navbar-footer {
@@ -23,7 +23,7 @@
 }
 
 .navbar-header:hover {
-    background-color: #000;
+    background-color: var(--c-primary-darker);
 }
 
 .logo {

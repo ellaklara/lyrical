@@ -8,7 +8,7 @@
 textarea {
     flex: 1;
     border: 0;
-    color: var(--c-text-light);
+    color: var(--c-main-text);
     background-color: inherit;
     resize: none;
     font-size: 1.2rem;
@@ -19,15 +19,12 @@ textarea {
 
 .lyrics-toolbar {
     display: flex;
+    user-select: none;
     width: 100%;
     height: 50px;
-    background-color: var(--c-primary-gray);
+    background-color: var(--c-primary-dim);
     border-bottom: 1px solid var(--c-primary);
     direction: rtl;
-}
-
-.lyrics-toolbar.hidden {
-    display: none;
 }
 
 .toolbar-btn {
@@ -38,6 +35,15 @@ textarea {
     border-left: 1px solid var(--c-primary);
     font-family: 'Varela Round', sans-serif;
     transition: background-color 0.5s ease-in-out;
+    text-align: center;
+}
+
+.toolbar-btn.disabled .toolbar-icon {
+    opacity: 0.1;
+}
+
+.toolbar-btn.hidden {
+    display: none;
 }
 
 .toolbar-btn:hover {
@@ -52,6 +58,7 @@ textarea {
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100%;
 }
 
 .toolbar-icon img {

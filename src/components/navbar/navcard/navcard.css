@@ -5,7 +5,7 @@
 .navcard {
     display: flex;
     justify-content: space-evenly;
-    color: var(--c-text-light);
+    color: var(--c-main-text);
     width: 100px;
     padding: 5px;
 }

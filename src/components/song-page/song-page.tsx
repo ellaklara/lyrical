@@ -37,7 +37,7 @@ const SongPage: FC<{song: GeniusSong, library: Array<GeniusSong>, updateSong: Fu
     return (
         <MainArea>
             <div className='song-page'>
-                <SongHeader song={song} library={props.library} toggleLibrary={() => props.toggleLibrary(props.library, song)}/>
+                <SongHeader song={song} songInLibrary={songInLibrary} library={props.library} toggleLibrary={() => props.toggleLibrary(props.library, song)}/>
                 <div className='song-content'>  
                     <LyricsSection song={song} updateSong={props.updateSongInLibrary} songInLibrary={songInLibrary}/>
                     <MediaSection song={song} updateSong={props.updateSong}/>

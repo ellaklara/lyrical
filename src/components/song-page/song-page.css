@@ -57,7 +57,7 @@
 
 .song-media a {
     margin: 10px;
-    border-bottom: 5px solid var(--c-text-light);
+    border-bottom: 5px solid var(--c-main-text);
 }
 
 .song-content {
