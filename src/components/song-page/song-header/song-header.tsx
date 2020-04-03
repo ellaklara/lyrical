@@ -4,7 +4,7 @@ import LoadingImg from '../../loading-img/loading-img';
 import PlusButton from '../../../assets/icons/plus-circle-outline.svg'
 import { GeniusSong } from '../../../model/genius/geniusTypes';
 
-const SongHeader: FC<{song: GeniusSong, library: GeniusSong[], removeFromLibrary: Function, addToLibrary: Function}> = (props) => {
+const SongHeader: FC<{song: GeniusSong, library: GeniusSong[], toggleLibrary: Function}> = (props) => {
 
     function checkLibrary(): any {
         for (const i in props.library) {
@@ -13,11 +13,6 @@ const SongHeader: FC<{song: GeniusSong, library: GeniusSong[], removeFromLibrary
             }
         }
         return { exists: false };
-    }
-
-    function handleOnClick(): void {
-        const libraryCheck = checkLibrary();
-        libraryCheck.exists ? props.removeFromLibrary(libraryCheck.index) : props.addToLibrary(props.song)
     }
 
     return (
@@ -30,7 +25,7 @@ const SongHeader: FC<{song: GeniusSong, library: GeniusSong[], removeFromLibrary
                     {props.song.title}
                     <span className='add-song'>
                         <img alt={'add/remove song'} src={PlusButton} className={checkLibrary().exists ? 'added' : ''} style={{height: '1em'}} 
-                        onClick={() => handleOnClick()}/>
+                        onClick={() => props.toggleLibrary()}/>
                     </span>
                 </div>
                 <div className='song-artist'>

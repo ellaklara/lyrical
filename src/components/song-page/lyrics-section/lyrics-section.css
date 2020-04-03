@@ -16,3 +16,44 @@ textarea {
     font-family: 'Varela Round', sans-serif;
     padding: 2em 4em 2em 4em;
 }
+
+.lyrics-toolbar {
+    display: flex;
+    width: 100%;
+    height: 50px;
+    background-color: var(--c-primary-gray);
+    border-bottom: 1px solid var(--c-primary);
+    direction: rtl;
+}
+
+.lyrics-toolbar.hidden {
+    display: none;
+}
+
+.toolbar-btn {
+    cursor: pointer;
+    display: flex;
+    padding: 0 2em 0 2em;
+    height: 100%;
+    border-left: 1px solid var(--c-primary);
+    font-family: 'Varela Round', sans-serif;
+    transition: background-color 0.5s ease-in-out;
+}
+
+.toolbar-btn:hover {
+    background-color: var(--c-primary-dark);
+}
+
+.toolbar-btn.active {
+    background-color: var(--c-primary-dark);
+}
+
+.toolbar-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.toolbar-icon img {
+    height: 50%;
+}

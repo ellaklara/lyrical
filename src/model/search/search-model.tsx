@@ -1,19 +1,20 @@
 import { GeniusSong } from "../genius/geniusTypes";
 
 const cleanString = (str: string) => {
-    var output = '';
-    for (var i=0; i<str.length; i++) {
-        if (str.charCodeAt(i) <= 127) {
-            output += str.charAt(i);
-        }
+    let clean = str;
+    for (const char of ['\'', '’']) {
+        clean = clean.replace(char, '');
     }
-    return output;
+    return clean;
 }
 
 export const searchGeniusSongArray = (query: string) => {
     
     return function(song: GeniusSong) {
-        const q = query.toLowerCase()
+        if (query.trim() === '') {
+            return true;
+        }
+        const q = cleanString(query).toLowerCase()
         const title = cleanString(song.title).toLowerCase(), artist = cleanString(song.primary_artist.name).toLowerCase()
         return title.includes(q) 
         || artist.includes(q)

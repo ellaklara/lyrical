@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 import MainArea from '../main-area/main-area';
 import './song-page.css';
 import { useParams } from 'react-router-dom';
@@ -8,23 +8,39 @@ import { AppState } from '../../model/redux/store';
 import { setCurrentSong } from '../../model/redux/songState';
 import LyricsSection from './lyrics-section/lyrics-section';
 import MediaSection from './media-section/media-section';
-import { addSongToLibrary, removeSongFromLibrary } from '../../model/redux/libraryState';
+import { toggleSongInLibrary, updateSongInLibrary } from '../../model/redux/libraryState';
 import SongHeader from './song-header/song-header';
 
-const SongPage: FC<{song: GeniusSong, library: GeniusSong[], updateSong: Function, addToLibrary: Function, removeFromLibrary: Function}> = (props) => {
+const SongPage: FC<{song: GeniusSong, library: Array<GeniusSong>, updateSong: Function, updateSongInLibrary: Function, toggleLibrary: Function}> = (props) => {
 
     interface ParamTypes {
         songId: string
       }
     const { songId } = useParams<ParamTypes>()
 
+    const [song, setSong] = useState(props.song)
+    const songInLibrary = () => {
+        return props.library.find((x: GeniusSong) => x.id.toString() === songId) ? true : false;
+    }
+
+    useEffect(() => {
+        setSong(props.song)
+    }, [props.song])
+
+    useEffect(() => {
+        const librarySong = (props.library.find((x: GeniusSong) => x.id.toString() === songId))
+        if(librarySong) {
+            setSong(librarySong)
+        }
+    })
+
     return (
         <MainArea>
             <div className='song-page'>
-                <SongHeader song={props.song} library={props.library} removeFromLibrary={props.removeFromLibrary} addToLibrary={props.addToLibrary}/>
+                <SongHeader song={song} library={props.library} toggleLibrary={() => props.toggleLibrary(props.library, song)}/>
                 <div className='song-content'>  
-                    <LyricsSection song={props.song} updateSong={props.updateSong}/>
-                    <MediaSection song={props.song} updateSong={props.updateSong}/>
+                    <LyricsSection song={song} updateSong={props.updateSongInLibrary} songInLibrary={songInLibrary}/>
+                    <MediaSection song={song} updateSong={props.updateSong}/>
                 </div>
             </div>  
         </MainArea>
@@ -38,8 +54,8 @@ const mapStateToProps = (state: AppState, ownProps: any): any => ({
 
 const mapDispatchToProps = (dispatch: any): any => ({
     updateSong: (song: GeniusSong) => {dispatch(setCurrentSong(song))},
-    addToLibrary: (song: GeniusSong) => {dispatch(addSongToLibrary(song))}, 
-    removeFromLibrary: (song: GeniusSong) => {dispatch(removeSongFromLibrary(song))},
+    updateSongInLibrary: (song: GeniusSong) => {dispatch(updateSongInLibrary(song))},
+    toggleLibrary: (library: GeniusSong[], song: GeniusSong) => {dispatch(toggleSongInLibrary(library, song))}, 
 });
 
 export default connect(

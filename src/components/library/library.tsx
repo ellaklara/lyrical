@@ -16,7 +16,8 @@ const Library: FC<{library: GeniusSong[]}> = (props) => {
     const [filteredLibrary, setFilteredLibrary] = useState(props.library)
 
     const onChangeHandler = (e: any) => {
-        setFilteredLibrary(props.library.filter(searchGeniusSongArray(e.target.value)))
+        const filtered = props.library.filter(searchGeniusSongArray(e.target.value))
+        setFilteredLibrary(filtered.length > 0 ? filtered : props.library)
     }
 
     return (
