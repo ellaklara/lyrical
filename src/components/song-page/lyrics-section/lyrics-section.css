@@ -56,11 +56,10 @@ textarea {
 
 .toolbar-icon {
     display: flex;
-    justify-content: center;
     align-items: center;
-    width: 100%;
 }
 
-.toolbar-icon img {
-    height: 50%;
+.toolbar-icon .svg-container {
+    width: 30px;
+    height: 30px;
 }

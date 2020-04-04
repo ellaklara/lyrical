@@ -3,9 +3,7 @@ import Spinner from '../../../assets/spinner.svg';
 import './lyrics-section.css';
 import { GeniusSong } from '../../../model/genius/geniusTypes';
 import { scrapeGeniusLyrics } from '../../../model/genius/geniusLyrics';
-import Edit from '../../../assets/icons/edit-outline.svg'
-import Plus from '../../../assets/icons/plus-outline.json'
-import Minus from '../../../assets/icons/minus-outline.svg'
+import SvgIcons from '../../../assets/icons/svg-icons.json'
 import Svg from '../../svg/svg';
 
 const LyricsSection: FC<{song: GeniusSong, updateSong: Function, songInLibrary: Function}> = (props) => {
@@ -52,12 +50,12 @@ const LyricsSection: FC<{song: GeniusSong, updateSong: Function, songInLibrary: 
                 <div className='lyrics-toolbar'>
                     <div className={`toolbar-btn ${readOnly ? '' : 'active'} ${props.songInLibrary() ? '' : 'hidden'}`} onClick={editLyrics}>
                         <div className='toolbar-icon'>
-                            <img alt='edit' src={Edit}/>
+                            <Svg icon={SvgIcons.editOutline}/>
                         </div>
                     </div>
                     <div className={`toolbar-btn ${(fontSize+step >= 2.1) ? 'disabled' : ''}`} onClick={() => changeFontSize(false)}>
                         <div className='toolbar-icon'>
-                            <Svg fill={"#000"} path={Plus.path}/>
+                            <Svg icon={SvgIcons.plusOutline}/>
                         </div>
                     </div>
                     <div className='toolbar-btn' style={{minWidth: '45px'}}>
@@ -67,7 +65,7 @@ const LyricsSection: FC<{song: GeniusSong, updateSong: Function, songInLibrary: 
                     </div>
                     <div className={`toolbar-btn ${(fontSize-step < step) ? 'disabled' : ''}`} onClick={() => changeFontSize(true)}>
                         <div className='toolbar-icon'>
-                            <img alt='-' src={Minus}/>
+                            <Svg icon={SvgIcons.minusOutline}/>
                         </div>
                     </div>
                 </div>

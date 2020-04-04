@@ -1,17 +1,20 @@
 import React, { FC} from 'react';
+import './svg.css'
 
-const Svg: FC<{path: string, fill: string}> = (props) => {
-
+const Svg: FC<{icon: {viewBox: string, paths: string[]}}> = (props) => {
     return (
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill={props.fill}>
-            <g data-name="Layer 2">
-                <g data-name="search">
-                    <rect width="24" height="24" opacity="0" />
-                    <path
-                        d={props.path} />
+        <div className='svg-container'>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox={props.icon.viewBox} >
+                <g data-name="Layer 2">
+                    <g data-name="search">
+                        <rect width="100%" height="100%" opacity="0" />
+                        {props.icon.paths.map((path) => 
+                            <path d={path} />
+                        )} 
+                    </g>
                 </g>
-            </g>
-        </svg>
+            </svg>
+        </div>
     );
 }
 
