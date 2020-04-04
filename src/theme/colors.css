@@ -7,13 +7,17 @@
     --c-primary-dim: #313131;
     --c-primary-light: #a2a2a2;
     --c-main-text: #fff;
+    --c-navbar-text: #fff;
 
+    
+    --c-pop: var(--c-primary);
     /*
     --c-primary: #fff;
     --c-primary-darker: #c4c8d1;
-    --c-primary-dark: #f7f8fa;
+    --c-primary-dark: #111;
     --c-primary-dim: #edf0f5;
     --c-primary-light: #fff;
     --c-main-text: #000;
+    --c-navbar-text: #fff;
     */
 }

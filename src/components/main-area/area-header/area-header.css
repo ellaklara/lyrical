@@ -1,7 +1,7 @@
 .area-header-container {
     display: flex;
     width: 100%;
-    background-color: var(--c-primary-dark);
+    background-color: var(--c-pop);
     justify-content: center;
 }
 

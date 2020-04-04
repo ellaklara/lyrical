@@ -6,7 +6,7 @@
 }
 
 .song-header {
-    background-color: var(--c-primary-dark);
+    background-color: var(--c-pop);
     border-bottom: 1px solid var(--c-primary);
     display: flex;
     align-items: center;
