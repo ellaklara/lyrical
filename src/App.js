@@ -11,10 +11,12 @@ import {
 } from "react-router-dom";
 import SongPage from './components/song-page/song-page';
 import Library from './components/library/library';
+import MobileWarning from './components/mobile-warning/mobile-warning';
 
 function App() {
   return (
     <div style={{display: 'flex', width: '100%', height: '100%'}}>
+      <MobileWarning/>
       <Router>
         <Navbar/>
           <Switch>

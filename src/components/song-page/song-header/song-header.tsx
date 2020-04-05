@@ -4,7 +4,6 @@ import LoadingImg from '../../loading-img/loading-img';
 import PlusButton from '../../../assets/icons/plus-circle-outline.svg'
 import { GeniusSong } from '../../../model/genius/geniusTypes';
 import Dialog from "../../dialog/dialog";
-import songPage from '../song-page';
 
 const SongHeader: FC<{song: GeniusSong, songInLibrary: Function, library: GeniusSong[], toggleLibrary: Function}> = (props) => {
 

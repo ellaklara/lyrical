@@ -1,0 +1,36 @@
+.mobile-warning {
+    top: 0;
+    left: 0;
+    position: fixed;
+    display: none;
+    z-index: 1000;
+    width: 100%;
+    height: 100%;
+    background-color: var(--c-primary);
+    color: var(--c-main-text);
+}
+
+.mobile-warning > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 20px;
+    text-align: center;
+}
+
+.warning-icon {
+    width: 100%;
+}
+
+.warning-icon .svg-container {
+    width: 40%;
+    margin: auto;
+}
+
+
+@media (max-width: 850px) {
+    .mobile-warning {
+        display: flex;
+    }
+}
