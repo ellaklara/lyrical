@@ -1,0 +1,8 @@
+.search-bar-input {
+    background-color: inherit;
+    border: 0;
+    border-bottom: 1px solid var(--c-main-text);
+    color: var(--c-main-text);
+    height: 50%;
+    font-size: 1em;
+}

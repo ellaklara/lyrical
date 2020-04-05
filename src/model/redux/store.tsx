@@ -5,21 +5,25 @@ import storage from 'redux-persist/lib/storage';
 
 import { songReducer, SongActions } from './songState';
 import { searchReducer, SearchActions } from './searchState';
+import { libraryReducer, LibraryActions } from './libraryState';
 
 const rootReducer = combineReducers({
     songState: songReducer,
     searchState: searchReducer,
+    libraryState: libraryReducer
 });
 
 export type AppActions = 
     SongActions |
-    SearchActions;
+    SearchActions |
+    LibraryActions;
 
 export type AppState = ReturnType<typeof rootReducer>;
 
 const persistConfig = {
     key: 'root',
     storage,
+    blacklist: ['searchState']
 }
    
 const persistedReducer = persistReducer(persistConfig, rootReducer)

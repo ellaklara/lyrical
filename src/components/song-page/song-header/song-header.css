@@ -1,0 +1,11 @@
+.black-overlay {
+    display: flex;
+    background-color: rgba(0,0,0,0.9);
+    width: inherit;
+    height: inherit;
+}
+
+.song-header {
+    background-size: cover;
+    background-position: 50% 20%;
+}

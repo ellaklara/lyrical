@@ -1,4 +1,4 @@
-import { GeniusSong } from "../genius/geniusFunctions";
+import { GeniusSong } from "../genius/geniusTypes";
 
 export interface SongState {
     current: GeniusSong | null,
