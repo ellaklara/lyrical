@@ -7,7 +7,7 @@ import { GeniusSong, GeniusMedia } from '../../../model/genius/geniusTypes';
 
 const MediaSection: FC<{song: GeniusSong, updateSong: Function}> = (props) => {
 
-    const [media, setMedia]: any = useState([])
+    const [media, setMedia]: any = useState(props.song.media ? props.song.media : [])
     const [musicVideo, setMusicVideo]: any = useState(<img alt='spinner' src={Spinner}/>)
 
     useEffect(() => {
@@ -15,12 +15,13 @@ const MediaSection: FC<{song: GeniusSong, updateSong: Function}> = (props) => {
             try {
                 setMedia(await getSongMedia(props.song.id.toString()))
             } catch {
-                
+                console.log("no found")
             }
         })();
       });
 
     useEffect(() => {
+        setMusicVideo(<></>)
         media.forEach((m: GeniusMedia) => {
             if(m.provider === 'youtube') {
                 setMusicVideo(

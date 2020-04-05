@@ -10,8 +10,10 @@
     --c-navbar-text: #fff;
 
     
-    --c-pop: var(--c-primary);
+    --c-pop: var(--c-primary-dark);
+    
     /*
+    --c-pop: #111;
     --c-primary: #fff;
     --c-primary-darker: #c4c8d1;
     --c-primary-dark: #111;
@@ -20,4 +22,5 @@
     --c-main-text: #000;
     --c-navbar-text: #fff;
     */
+    
 }
